@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { MenuItem, Select, Snackbar, Icon, IconButton } from '@mui/material';
+import { MenuItem, Select, Snackbar, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css"
 import './Navbar.css'
+import {Link} from "react-router-dom"
 
 class Navbar extends Component {
     constructor(props){
@@ -21,12 +22,12 @@ class Navbar extends Component {
         this.setState({open: false});
     }
     render() {
-        const {level, changeLevel, handleChange} = this.props;
+        const {level, changeLevel} = this.props;
         const {format} = this.state;
         return (
             <header className='navbar'>
                 <div className='logo'>
-                    <a href="/">Color Picker</a>
+                    <Link to="/">Color Picker</Link>
                 </div>
                 <div className='slider-container'>
                     <span>Level: {level}</span>
@@ -49,8 +50,8 @@ class Navbar extends Component {
                 ContentProps={{"aria-describedby":"message=id"}}
                 onClose={this.closeSnackbar}
                 action={[
-                    <IconButton>
-                        <CloseIcon onClick={this.closeSnackbar} color="inherit" key='close' aria-label='close'/>
+                    <IconButton onClick={this.closeSnackbar} >
+                        <CloseIcon color="inherit" key='close' aria-label='close'/>
                     </IconButton>
                 ]}/>
             </header>
