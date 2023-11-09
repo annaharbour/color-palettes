@@ -1,19 +1,28 @@
 import Palette from './Palette';
 import { generatePalette } from './colorHelpers';
 import seedColors from './seedColors';
-import React, { Component } from 'react';
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+import { useParams } from 'react-router';
 
+const findPalette = (id) => seedColors.find(palette => palette.id === id);
 
-class App extends Component {
-  render() {
-    console.log(generatePalette(seedColors[4]));
-    return (
-      <div className="App">
-        <Palette palette={generatePalette(seedColors[4])} />
-      </div>
-    );
-  }
+const PaletteWrapper = () => {
+  const { id } = useParams();
+  const palette = generatePalette(findPalette(id));
+  return <Palette palette={palette} />;
+};
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path='/' element={<Palette palette={generatePalette(seedColors[0])} />} />
+        <Route path='/palette/:id' element={<PaletteWrapper />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
