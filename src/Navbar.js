@@ -5,14 +5,19 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css"
 import './Navbar.css'
 import {Link} from "react-router-dom"
+import PaletteList from './PaletteList';
 
 class Navbar extends Component {
     constructor(props){
         super(props);
-        this.state = {format: "hex", open: false};
+        this.state = {format: "hex", open: false, palette:""};
         this.HandleFormatChange = this.HandleFormatChange.bind(this);
+        this.HandlePaletteChange = this.HandlePaletteChange.bind(this);
         this.closeSnackbar = this.closeSnackbar.bind(this);
     }
+    HandlePaletteChange(e){
+        this.setState({palette: e.target.value});
+      }
     HandleFormatChange(e){
         this.setState({format: e.target.value, open: true});
         this.props.handleChange(e.target.value);
@@ -22,8 +27,8 @@ class Navbar extends Component {
         this.setState({open: false});
     }
     render() {
-        const {level, changeLevel} = this.props;
-        const {format} = this.state;
+        const {level, changeLevel, palettes} = this.props;
+        const {format, palette} = this.state;
         return (
             <header className='navbar'>
                 <div className='logo'>
@@ -34,6 +39,15 @@ class Navbar extends Component {
                     <div className="slider">
                      <Slider defaultValue={level} min={100} max={900} step={100} onChange={changeLevel} />
                     </div>
+                </div>
+                <div className="select-container">
+                  <Select value={palette} onChange={this.HandlePaletteChange}>
+                    {palettes.map((palette) => (
+                      <MenuItem key={palette.id} value={palette.id}>
+                        <Link to={`/palette/${palette.id}`}>{palette.paletteName}</Link>
+                      </MenuItem>
+                    ))}
+                  </Select>
                 </div>
                 <div className='select-container'>
                   <Select value={format} onChange={this.HandleFormatChange}>

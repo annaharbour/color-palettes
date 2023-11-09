@@ -3,6 +3,7 @@ import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
 import 'rc-slider/assets/index.css';
 import './Palette.css'
+import seedColors from "./seedColors";
 
 
 class Palette extends Component {
@@ -28,7 +29,7 @@ class Palette extends Component {
       <ColorBox key={color.id} background={color[format]} name={color.name}/>)
     return (
       <div className='Palette'>
-        <Navbar level={level} handleChange={this.changeFormat} changeLevel={this.changeLevel}/>
+        <Navbar  palettes={seedColors} level={level} handleChange={this.changeFormat} changeLevel={this.changeLevel}/>
         <div className='Palette-colors'>{colorBoxes}</div>
         <footer className="Palette-footer">
           {paletteName}

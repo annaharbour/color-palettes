@@ -19,8 +19,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* <Route path='/' element={<Palette palette={generatePalette(seedColors[0])} />} /> */}
-        <Route path='/' element={<PaletteList palettes={seedColors} />} /> {/* Display PaletteList on the homepage */}
+        <Route path='/' element={<PaletteList palettes={seedColors} />} /> 
         <Route path='/palette/:id' element={<PaletteWrapper />} />
       </Routes>
     </Router>
