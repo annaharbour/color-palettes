@@ -2,7 +2,7 @@ import Palette from './Palette';
 import { generatePalette } from './colorHelpers';
 import seedColors from './seedColors';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import { useParams } from 'react-router';
 import PaletteList from './PaletteList';
@@ -16,10 +16,12 @@ const PaletteWrapper = () => {
 };
 
 function App() {
+
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<PaletteList palettes={seedColors} />} /> 
+      <Route path='/' element={<Navigate to={'/palette/material-ui-colors'} />} /> 
+        {/* <Route path='/' element={<PaletteList palettes={seedColors} />} />  */}
         <Route path='/palette/:id' element={<PaletteWrapper />} />
       </Routes>
     </Router>
